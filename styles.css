@@ -1,0 +1,794 @@
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .vless-input {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    h1,
+    .subheader {
+        font-size: 1.5em;
+        margin: 15px 0;
+    }
+
+    .button-group .action-btn {
+        padding: 8px 16px;
+        margin: 5px 0;
+    }
+
+    .checkbox-group {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        /* Добавляем горизонтальную прокрутку */
+    }
+
+    table {
+        width: 100%;
+        /* Оставляем ширину 100%, но теперь таблицы можно прокручивать */
+    }
+
+    table th,
+    table td {
+        padding: 8px;
+        font-size: 0.9em;
+    }
+
+    .status-circle {
+        top: 5px;
+        left: 5px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .checkbox-group {
+        justify-content: center;
+        /* Центрируем переключатели */
+        gap: 10px;
+        /* Промежутки между переключателями */
+    }
+
+    .toggle {
+        flex: 1 1 25%;
+        /* Переключатели равномерно занимают 25% ширины */
+        margin: 5px;
+    }
+
+    .toggle-label {
+        font-size: 12px;
+        /* Уменьшаем размер шрифта для меток переключателей */
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1,
+    .subheader {
+        font-size: 1.2em;
+    }
+
+    .vless-input {
+        height: 60px;
+        font-size: 11px;
+    }
+
+    .button-group .action-btn {
+        padding: 6px 12px;
+        font-size: 12px;
+    }
+
+    input:checked+.toggle-switch::before {
+        transform: translateX(22px);
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+        /* Продолжаем использовать горизонтальную прокрутку для мобильных устройств */
+    }
+
+    table {
+        width: 100%;
+        /* Таблица остается адаптивной */
+    }
+
+    table th,
+    table td {
+        padding: 6px;
+        font-size: 0.8em;
+        /* Уменьшаем шрифт для узких экранов */
+    }
+
+    .checkbox-group {
+        flex-wrap: wrap;
+        /* Переключатели могут переноситься на следующую строку при необходимости */
+        justify-content: space-between;
+    }
+
+    .toggle {
+        flex: 1 1 45%;
+        /* Для очень маленьких экранов переключатели занимают 45% ширины */
+        margin: 5px 0;
+    }
+
+    .toggle-label {
+        font-size: 12px;
+        /* Уменьшаем размер шрифта для меток переключателей */
+    }
+
+    .toggle-switch {
+        width: 40px;
+        height: 20px;
+    }
+
+    .toggle-switch::before {
+        width: 18px;
+        height: 18px;
+    }
+
+    input:checked+.toggle-switch::before {
+        transform: translateX(22px);
+    }
+
+}
+
+/* Общие стили для body */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Изменено на flex-start для корректной прокрутки */
+    min-height: 100vh;
+    height: auto;
+    /* Убираем фиксированную высоту */
+    flex-direction: column;
+    transition: background-color 0.3s, color 0.3s;
+    overflow-y: auto;
+    /* Включаем вертикальную прокрутку */
+}
+
+/* Тема */
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+body.dark-mode {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+/* Контейнер теперь будет адаптироваться к высоте контента */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+body.dark-mode .container {
+    background-color: #444;
+}
+
+/* Заголовки */
+h1,
+.subheader {
+    color: #0098d9;
+    text-align: center;
+    margin: 20px 0 10px;
+}
+
+/* Переключатели */
+.toggle-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.checkbox-group {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    /* Отключаем перенос строк */
+    gap: 10px;
+    /* Промежутки между переключателями */
+    width: 100%;
+    /* Устанавливаем фиксированную ширину для всей группы */
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    /* Делаем переключатели гибкими, чтобы они равномерно распределялись */
+    min-width: 100px;
+    /* Устанавливаем минимальную ширину, чтобы метки и переключатели не сжимались слишком сильно */
+}
+
+.toggle input {
+    display: none;
+}
+
+.toggle span,
+.toggle-label {
+    margin-right: 10px;
+    color: #0098d9;
+}
+
+.toggle-switch {
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+input:checked+.toggle-switch::before {
+    transform: translateX(26px);
+}
+
+input:checked+.toggle-switch {
+    background-color: #0098d9;
+}
+
+/* Текстовые поля */
+.vless-input {
+    width: 100%;
+    height: 80px;
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 13px;
+    line-height: 1.5;
+    resize: none;
+    word-break: break-word;
+}
+
+.vless-input::placeholder {
+    color: #999;
+}
+
+/* Стили для таблицы out_russia */
+table.out_russia {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.out_russia th,
+table.out_russia td {
+    border: 0px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table.out_russia th {
+    background-color: #0098d9;
+    color: white;
+}
+
+/* Стили для кнопки удаления */
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Стили для кнопок "Добавить домен" и "Добавить порт" */
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.section_tab {
+    width: 100%;
+    box-sizing: border-box;
+    transition: height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+.hidden {
+    display: none;
+    /* Скрытие кнопок */
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.hidden_sort {
+    display: none;
+    height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+.visible_sort {
+    display: inline-block;
+    height: auto;
+    opacity: 1;
+}
+
+.visible {
+    height: auto;
+    opacity: 1;
+    overflow: visible;
+    transition: height 0.3s ease, opacity 0.3s ease;
+}
+
+
+.add-btn {
+    background-color: #0098d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-btn:hover {
+    background-color: #007bb5;
+}
+
+.add-domain-btn {
+    background-color: #0098d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-domain-btn:hover {
+    background-color: #007bb5;
+}
+
+.add-port-btn {
+    background-color: #0098d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-port-btn:hover {
+    background-color: #007bb5;
+}
+
+
+.add-protocol-btn {
+    background-color: #0098d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-protocol-btn:hover {
+    background-color: #007bb5;
+}
+
+/* Стили для кнопок "Добавить домен", "Добавить порт", "Добавить протокол", "Добавить транспорт" */
+.button-group {
+    margin-top: 20px;
+    text-align: center;
+}
+
+/* Стили для таблицы "in_russia", аналогичные таблице "out_russia" */
+table.in_russia {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.in_russia th,
+table.in_russia td {
+    border: 0px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table.in_russia th {
+    background-color: #0098d9;
+    color: white;
+}
+
+/* Стили для таблиц "direct", "block", и "dns", аналогичные таблицам "out_russia" и "in_russia" */
+table.direct_table,
+table.block_table,
+table.dns_table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+table.direct_table th,
+table.block_table th,
+table.dns_table th,
+table.direct_table td,
+table.block_table td,
+table.dns_table td {
+    border: 0px solid #ccc;
+    padding: 10px;
+    text-align: left;
+}
+
+table.direct_table th,
+table.block_table th,
+table.dns_table th {
+    background-color: #0098d9;
+    color: white;
+}
+
+/* Стили для кнопок */
+.action-btn {
+    background-color: #0098d9;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action-btn:hover {
+    background-color: #007bb5;
+}
+
+/* Стили для круга в левом верхнем углу */
+.status-circle {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    /* Изначально красный цвет */
+    border-radius: 50%;
+    border: 2px solid #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Обновленный стиль для контейнера с замком (тумблером) */
+.lock-toggle {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+/* Обновленные стили для контейнера */
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    box-sizing: border-box;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    /* Оставляем относительное позиционирование */
+}
+
+/* Скрываем стандартный чекбокс */
+.lock-toggle input[type="checkbox"] {
+    display: none;
+}
+
+/* Стили для тумблера */
+.lock-toggle .toggle-switch {
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.lock-toggle .toggle-switch::before {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-color: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: 0.3s;
+}
+
+input:checked+.toggle-switch::before {
+    transform: translateX(26px);
+}
+
+input:checked+.toggle-switch {
+    background-color: #0098d9;
+}
+
+/* Стиль для иконки*/
+.icon {
+    font-size: 20px;
+    margin-right: 10px;
+    /* Отступ замка от тумблера */
+    color: #0098d9;
+}
+
+/* Контейнер */
+.container {
+    /* Остальные стили контейнера */
+    margin-bottom: 60px;
+    /* Добавляем отступ внизу контейнера, чтобы футер не перекрывал его */
+}
+
+/* Стили для футера */
+footer {
+    text-align: center;
+    padding: 10px 0;
+    /* Увеличиваем высоту футера */
+    background-color: rgba(240, 240, 240, 0.8);
+    /* Полупрозрачный фон */
+    color: #333;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    /* Небольшая тень для футера */
+    height: 40px;
+    /* Высота футера */
+    backdrop-filter: blur(5px);
+    /* Эффект размытия за футером (опционально) */
+}
+
+footer a {
+    color: #0098d9;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
+/* Модальное окно */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Контент модального окна */
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 600px;
+    width: 100%;
+    position: relative;
+    background-color: #fff;
+    /* Для светлой темы */
+    color: #333;
+    /* Для светлой темы */
+    border-radius: 10px;
+    padding: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+body.dark-mode .modal-content {
+    background-color: #444;
+    /* Для темной темы */
+    color: #f0f0f0;
+    /* Для темной темы */
+}
+
+/* Кнопка закрытия модального окна */
+.close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Основные стили для модального окна */
+.alert_modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Полупрозрачный фон */
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
+}
+
+.alert_modal.show {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+/* Светлая тема для модального окна */
+body.light-mode .alert_content {
+    background-color: white;
+    color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Темная тема для модального окна */
+body.dark-mode .alert_content {
+    background-color: #444;
+    color: #f0f0f0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+.alert_content {
+    margin: 15% auto;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+    /* Переходы для фона и текста */
+}
+
+.sortable-item {
+    width: 100%;
+    /* Во всю ширину модального окна */
+    margin: 5px 0;
+    /* Отменяем боковые отступы */
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    /* Светлый фон для светлой темы */
+    color: #333;
+    /* Тёмный текст для читаемости */
+    cursor: grab;
+    transition: background-color 0.3s;
+    /* Плавный переход фона */
+    user-select: none;
+    /* Запретить выделение текста при перетаскивании */
+}
+
+.sortable-item:hover {
+    background-color: #e0e0e0;
+    /* Изменение фона при наведении */
+}
+
+.collapsed {
+    max-height: 40px; /* Высота для сворачивания */
+    overflow: hidden; /* Скрыть лишний текст */
+}
+
+.placeholder {
+    height: 40px;
+    background-color: rgba(224, 224, 224, 0.5);
+    /* Полупрозрачный фон */
+    border: 1px dashed #ccc;
+}
+
+#sortable-list {
+    width: 100%;
+    /* Во всю ширину модального окна */
+    max-width: 100%;
+    /* Ограничиваем ширину */
+    overflow: hidden;
+    /* Скрываем переполнение */
+}
+
+.tag-info {
+    color: #0098d9;
+    /* Цвет для тегов */
+}
+
+/* Стиль для модального окна */
+#jsonModal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow-y: auto;
+}
+
+/* Стиль содержимого модального окна */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    position: relative;
+}
+
+/* Стиль редактора JSON */
+#json-editor {
+    height: 600px;
+    width: 100%;
+}
+
+.placeholder {
+    border: 2px dashed #ccc;
+    height: 50px;
+}
+
+/* Стиль крестика для закрытия */
+.close {
+    font-size: 0px;
+}
+
+.expanded {
+    white-space: normal;
+    cursor: pointer;
+}
