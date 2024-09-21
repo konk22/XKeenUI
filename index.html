@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XKeen UI</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="src/favicon.ico" type="image/x-icon">
+    <script src="src/ace.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="status-circle" id="statusCircle"></div>
+        <!-- Чекбокс в виде замка -->
+        <div class="lock-toggle">
+            <input type="checkbox" id="lockToggle">
+            <label for="lockToggle" class="toggle-switch"></label>
+            <span class="lock-icon">&#x1F513;</span> <!-- Замок слева от тумблера -->
+            <input type="checkbox" id="modeToggle">
+            <label for="modeToggle" class="toggle-switch"></label>
+            <span class="lock-icon">&#x1F317;</span>
+        </div>
+        <h1>XKeen UI</h1>
+        <div id="saveLock" style="display:none;">
+            <!-- Заголовок "Режим работы XKeen" -->
+            <h2 class="subheader">Режим работы XKeen</h2>
+            <!-- Блок для связанных переключателей под заголовком -->
+            <div class="checkbox-group">
+                <div class="toggle">
+                    <span class="toggle-label">Mixed</span>
+                    <input type="radio" id="radio1" name="options">
+                    <label for="radio1" class="toggle-switch"></label>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">TProxy</span>
+                    <input type="radio" id="radio2" name="options">
+                    <label for="radio2" class="toggle-switch"></label>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Redirect</span>
+                    <input type="radio" id="radio3" name="options">
+                    <label for="radio3" class="toggle-switch"></label>
+                </div>
+            </div>
+            <!-- Заголовок "Настройка подключения" -->
+            <h2 class="subheader">Настройка подключения</h2>
+
+            <!-- Блок для переключателей под заголовком -->
+            <div class="checkbox-group">
+                <div class="toggle">
+                    <span class="toggle-label">2 VPS</span>
+                    <input type="checkbox" id="vps2">
+                    <label for="vps2" class="toggle-switch"></label>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Direct</span>
+                    <input type="checkbox" id="direct">
+                    <label for="direct" class="toggle-switch"></label>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">Block</span>
+                    <input type="checkbox" id="block">
+                    <label for="block" class="toggle-switch"></label>
+                </div>
+                <div class="toggle">
+                    <span class="toggle-label">DNS</span>
+                    <input type="checkbox" id="dns">
+                    <label for="dns" class="toggle-switch"></label>
+                </div>
+            </div>
+            <!-- Текстовое поле для ввода URL -->
+            <textarea class="vless-input" placeholder="Вставьте URL VLESS"></textarea>
+
+            <!-- Текстовое поле для URL VPS, скрытое по умолчанию -->
+            <textarea id="vps-url" class="vless-input" placeholder="Вставьте URL VLESS внутри РФ"
+                style="display:none;"></textarea>
+        </div>
+        <!-- Добавляем блок для кнопок перед заголовком "Настройки маршрутизации" -->
+        <div class="button-group">
+            <button class="action-btn" id="save-btn">Сохранить</button>
+            <button class="action-btn" id="reload-btn">Перезагрузить</button>
+            <button class="action-btn" id="stop-btn">Остановить</button>
+            <button class="action-btn" id="rollback-btn">Откатить</button>
+        </div>
+        <div class="button-group">
+            <button class="action-btn hidden" id="inbound-btn">03_inbound</button>
+            <button class="action-btn hidden" id="outbound-btn">04_outbound</button>
+            <button class="action-btn" id="routing-btn">05_routing</button>
+        </div>
+        <!-- Заголовок "Настройки маршрутизации" -->
+        <h2 class="subheader">Настройки маршрутизации</h2>
+        <!-- Кнопки "Добавить домен" и "Добавить порт" под таблицей -->
+
+        <div class="button-group table-wrapper">
+            <span class="toggle-label">Out Russia VPS</span><span class="toggle-icon" id="outRussiaToggle">▼</span><br>
+            <section id="outRussiaBody" class="section_tab hidden">
+                <!-- Таблица "out_russia" под заголовком "Настройки маршрутизации" -->
+                <table class="out_russia">
+                </table>
+                <button class="add-domain-btn">Добавить домен</button>
+                <button class="add-port-btn">Добавить порт</button>
+                <button class="add-protocol-btn">Добавить протокол</button>
+            </section>
+        </div>
+
+        <!-- Таблица "in_russia" и кнопки, скрытые по умолчанию -->
+        <div class="button-group table-wrapper" id="in-russia" style="display: none;">
+            <span class="toggle-label">In Russia VPS</span><span class="toggle-icon" id="inRussiaToggle">▼</span><br>
+            <section id="inRussiaBody" class="hidden">
+                <table class="in_russia">
+                </table>
+                <button class="add-domain-btn">Добавить домен</button>
+                <button class="add-port-btn">Добавить порт</button>
+                <button class="add-protocol-btn">Добавить протокол</button>
+            </section>
+        </div>
+
+        <!-- Таблица для "Direct" -->
+        <div class="button-group table-wrapper" id="direct-section" style="display: none;">
+            <span class="toggle-label">Direct</span><span class="toggle-icon" id="directToggle">▼</span><br>
+            <section id="directBody" class="hidden">
+                <table class="direct_table">
+                </table>
+                <button class="add-domain-btn">Добавить домен</button>
+                <button class="add-port-btn">Добавить порт</button>
+                <button class="add-protocol-btn">Добавить протокол</button>
+            </section>
+        </div>
+
+        <!-- Таблица для "Block" -->
+        <div class="button-group table-wrapper" id="block-section" style="display: none;">
+            <span class="toggle-label">Block</span><span class="toggle-icon" id="blockToggle">▼</span><br>
+            <section id="blockBody" class="hidden">
+                <table class="block_table">
+                </table>
+                <button class="add-domain-btn">Добавить домен</button>
+                <button class="add-port-btn">Добавить порт</button>
+                <button class="add-protocol-btn">Добавить протокол</button>
+            </section>
+        </div>
+
+        <!-- Таблица для "DNS" -->
+        <div class="button-group table-wrapper" id="dns-section" style="display: none;">
+            <span class="toggle-label">DNS</span><span class="toggle-icon" id="dnsToggle">▼</span>
+            <section id="dnsBody" class="hidden">
+                <table class="dns_table">
+                </table>
+                <button class="add-port-btn">Добавить порт</button>
+            </section>
+        </div>
+    </div>
+
+    <div id="jsonModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <button id="edit-json" class="action-btn hidden_sort">Сортировка маршрутов</button>
+            <button id="sort-json" class="action-btn">Редактор</button>
+            <span class="close">&times;</span>
+
+            <!-- Контейнер для Ace Editor -->
+            <div id="json-editor"></div>
+            <!-- Секция для сортировки -->
+            <div id="sortable-list" style="display:none;">
+                <!-- Элементы будут добавлены динамически -->
+            </div>
+            <button id="save-json" class="action-btn">Сохранить</button>
+            <button id="close-json" class="action-btn">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модальное окно сообщений-->
+    <div id="alert_modal" class="alert_modal">
+        <div class="alert_content">
+            <p id="alert_message"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created by konk22 <a href="https://github.com/konk22/XKeenUI" target="_blank">Github</a></p>
+    </footer>
+    <script src="src/checkstatus.js"></script>
+    <script src="src/theme.js"></script>
+    <script src="src/lock.js"></script>
+    <script src="src/showsettings.js"></script>
+    <script src="src/datgetting.js"></script>
+    <script src="src/adddomain.js"></script>
+    <script src="src/addport.js"></script>
+    <script src="src/addprotocol.js"></script>
+    <script src="src/inboundsgetting.js"></script>
+    <script src="src/outboundgetting.js"></script>
+    <script src="src/vlessstringgenerate.js"></script>
+    <script src="src/vlessstringput.js"></script>
+    <script src="src/routinggetting.js"></script>
+    <script src="src/restoreconfig.js"></script>
+    <script src="src/restart.js"></script>
+    <script src="src/stop.js"></script>
+    <script src="src/inboundsgenerate.js"></script>
+    <script src="src/tabspoiler.js"></script>
+    <script src="src/vlessstringparser.js"></script>
+    <script src="src/outboundsgenerate.js"></script>
+    <script src="src/routinggenerate.js"></script>
+    <script src="src/cleartable.js"></script>
+    <script src="src/savedata.js"></script>
+    <script src="src/modaleditor.js"></script>
+    <script src="src/modalmessage.js"></script>
+    <script src="src/onloads.js"></script>
+</body>
+
+</html>
