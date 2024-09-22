@@ -70,6 +70,7 @@ function processTable(tableElement, outboundTag, routingConfig, inboundTags) {
             }
 
             // Обработка портов
+            // Обработка портов
             if (selectValue === "TCP" || selectValue === "UDP") {
                 const portValue = inputValue;
 
@@ -87,12 +88,14 @@ function processTable(tableElement, outboundTag, routingConfig, inboundTags) {
                     // Добавляем активный блок порта в routingConfig
                     routingConfig.routing.rules.push(portTemplate);
                 } else {
-                    // Добавляем в disabled_rules
-                    portTemplate.disabled_rules.push({
-                        network: selectValue,
-                        port: portValue
-                    });
-                    routingConfig.routing.rules.push(portTemplate);
+                    // Добавляем порт только в disabled_rules
+                    const disabledTemplate = {
+                        inboundTag: inboundTags,
+                        outboundTag: outboundTag,
+                        type: "field",
+                        disabled_rules: [{ network: selectValue, port: portValue }]
+                    };
+                    routingConfig.routing.rules.push(disabledTemplate);
                 }
             }
             if (selectValue === "TCP/UDP") {
