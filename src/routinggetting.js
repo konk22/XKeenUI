@@ -259,7 +259,7 @@ async function populateTables() {
             disabled_rules.forEach(rule => {
                 // Если disabled_rules содержит объекты с полями network и port
                 if (rule.network && rule.port) {
-                    const row = createTableRowForPort(rule.port, rule.network, false); // Чекбокс отключен
+                    const row = createTableRowForPort(rule.port, rule.network, targetTable, false); // Чекбокс отключен
                     addDeleteFunctionality(row);
                     targetTable.appendChild(row);
                 } else if (domain) {
