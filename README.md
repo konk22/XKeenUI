@@ -36,7 +36,7 @@ XKeenUI поддерживает функцию временного отклю�
 Для установки XKeenUI выполните следующую команду в вашем терминале:
 
 ```
-curl -O https://raw.githubusercontent.com/konk22/XKeenUI/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
+cd /opt/etc/xray && curl -O https://raw.githubusercontent.com/konk22/XKeenUI/refs/heads/main/install.sh && chmod +x install.sh && ./install.sh
 ```
 
 
